@@ -1,1 +1,1 @@
-# ImageEditor-GUI-
+# ImageEditor
