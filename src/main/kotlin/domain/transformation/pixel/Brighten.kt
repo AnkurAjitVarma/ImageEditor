@@ -1,6 +1,6 @@
-package model.transformation.pixel
+package domain.transformation.pixel
 
-import model.transformation.Transformation
+import domain.transformation.Transformation
 
 class Brighten(val amount:UByte):Transformation {
     override fun transform(image: Array<Array<Array<UByte>>>): Array<Array<Array<UByte>>> {

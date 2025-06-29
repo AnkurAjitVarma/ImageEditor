@@ -1,7 +1,7 @@
-package model.image.implementation
+package domain.image.implementation
 
-import model.image.Image
-import model.transformation.Transformation
+import domain.image.Image
+import domain.transformation.Transformation
 import utilities.BLUE_CHANNEL
 import utilities.GREEN_CHANNEL
 import utilities.RED_CHANNEL

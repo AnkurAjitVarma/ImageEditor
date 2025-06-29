@@ -10,4 +10,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "ImageEditor GUI"
+rootProject.name = "ImageEditor"
