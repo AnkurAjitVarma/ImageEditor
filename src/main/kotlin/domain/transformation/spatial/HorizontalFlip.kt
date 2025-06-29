@@ -1,6 +1,6 @@
-package model.transformation.spatial
+package domain.transformation.spatial
 
-import model.transformation.Transformation
+import domain.transformation.Transformation
 
 val HorizontalFlip = Transformation { image ->
     val height = image.size

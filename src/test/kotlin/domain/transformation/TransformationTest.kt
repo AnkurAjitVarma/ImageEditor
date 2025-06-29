@@ -1,8 +1,7 @@
-package model.transformation
+package domain.transformation
 
-import model.transformation.filter.Sharpen
-import model.transformation.spatial.HorizontalFlip
-import model.transformation.spatial.VerticalFlip
+import domain.transformation.spatial.HorizontalFlip
+import domain.transformation.spatial.VerticalFlip
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

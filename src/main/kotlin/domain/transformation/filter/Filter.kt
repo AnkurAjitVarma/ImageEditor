@@ -1,6 +1,6 @@
-package model.transformation.filter
+package domain.transformation.filter
 
-import model.transformation.Transformation
+import domain.transformation.Transformation
 
 abstract class Filter(private val kernel: Array<Array<Double>>): Transformation {
     protected fun applyFilter(image: Array<Array<Array<UByte>>>): Array<Array<Array<UByte>>> {

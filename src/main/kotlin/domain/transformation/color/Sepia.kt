@@ -1,6 +1,6 @@
-package model.transformation.color
+package domain.transformation.color
 
-import model.transformation.Transformation
+import domain.transformation.Transformation
 import utilities.BLUE_CHANNEL
 import utilities.GREEN_CHANNEL
 import utilities.RED_CHANNEL

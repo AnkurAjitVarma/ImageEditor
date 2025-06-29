@@ -1,6 +1,6 @@
 package utilities
 
-import model.image.Image
+import domain.image.Image
 import java.awt.image.BufferedImage
 import java.nio.file.Files
 import java.nio.file.Path
