@@ -1,8 +1,8 @@
-package domain.transformation.pixel
+package domain.transformation.pixelwise.level
 
-import domain.transformation.Transformation
+import domain.transformation.pixelwise.PixelwiseTransformation
 
-class Brighten(val amount:UByte):Transformation {
+class Brighten(val amount:UByte): PixelwiseTransformation {
     override fun transform(image: Array<Array<Array<UByte>>>): Array<Array<Array<UByte>>> {
         val height = image.size
         val width = image[0].size
