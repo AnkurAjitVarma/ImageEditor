@@ -1,7 +1,8 @@
 package domain.image.implementation
 
 import domain.image.Image
-import domain.transformation.Transformation
+import domain.transformation.color.ColorTransformation
+import domain.transformation.pixelwise.PixelwiseTransformation
 import utilities.BLUE_CHANNEL
 import utilities.GREEN_CHANNEL
 import utilities.RED_CHANNEL
@@ -15,7 +16,9 @@ internal class ImageImpl(private val image: Array<Array<Array<UByte>>>):Image {
 
     override fun valueAt(row: Int, column: Int, channel: Int): UByte? = if (row in 0 until height() && column in 0 until width() && channel in 0 until noOfChannels()) image[row][column][channel] else null
 
-    override fun apply(transformation: Transformation): Image = ImageImpl(transformation.transform(image))
+    override fun apply(pixelwiseTransformation: PixelwiseTransformation): Image = ImageImpl(pixelwiseTransformation.transform(image))
+
+    override fun apply(colorTransformation: ColorTransformation): Image? = if (noOfChannels()<3) null else ImageImpl(colorTransformation.transform(image))
 
     override fun valueComponent(): Image? = if (noOfChannels()!=3) null else {
         val component = Array(height()) { Array(width()) { Array(1) { 0.toUByte() } } }
