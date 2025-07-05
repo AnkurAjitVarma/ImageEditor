@@ -1,7 +1,8 @@
 package domain.image
 
 import domain.image.implementation.ImageImpl
-import domain.transformation.Transformation
+import domain.transformation.color.ColorTransformation
+import domain.transformation.pixelwise.PixelwiseTransformation
 import utilities.BLUE_CHANNEL
 import utilities.GREEN_CHANNEL
 import utilities.RED_CHANNEL
@@ -11,7 +12,8 @@ interface Image {
     fun width():Int
     fun noOfChannels():Int
     fun valueAt(row:Int, column:Int, channel:Int):UByte?
-    fun apply(transformation: Transformation):Image
+    fun apply(pixelwiseTransformation: PixelwiseTransformation):Image
+    fun apply(colorTransformation: ColorTransformation):Image?
     fun valueComponent():Image?
     fun intensityComponent():Image?
     fun lumaComponent():Image?

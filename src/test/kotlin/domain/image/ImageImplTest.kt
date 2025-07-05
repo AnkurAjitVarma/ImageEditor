@@ -1,7 +1,7 @@
-package domain.image.implementation
+package domain.image
 
-import domain.image.Image
-import domain.transformation.Transformation
+import domain.image.implementation.ImageImpl
+import domain.transformation.pixelwise.PixelwiseTransformation
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
@@ -40,7 +40,7 @@ class ImageImplTest {
 
     @Test
     fun `test apply transformation applies the transformation`() {
-        val mockTransformation = Transformation { image ->
+        val mockPixelwiseTransformation = PixelwiseTransformation { image ->
             image.map { row ->
                 row.map { pixel ->
                     pixel.map { 0.toUByte() }.toTypedArray()
@@ -48,7 +48,7 @@ class ImageImplTest {
             }.toTypedArray()
         }
 
-        val transformedImage = image.apply(mockTransformation)
+        val transformedImage = image.apply(mockPixelwiseTransformation)
         assertEquals(0.toUByte(), transformedImage.valueAt(0, 0, 0))
     }
 

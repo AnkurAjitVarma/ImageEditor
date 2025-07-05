@@ -1,7 +1,7 @@
 package domain.transformation
 
-import domain.transformation.spatial.HorizontalFlip
-import domain.transformation.spatial.VerticalFlip
+import domain.transformation.pixelwise.spatial.HorizontalFlip
+import domain.transformation.pixelwise.spatial.VerticalFlip
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
