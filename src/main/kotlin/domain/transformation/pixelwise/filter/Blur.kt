@@ -1,4 +1,4 @@
-package domain.transformation.filter
+package domain.transformation.pixelwise.filter
 
 private val kernel = arrayOf(
     arrayOf(1.0 / 16, 1.0 / 8, 1.0 / 16),

@@ -1,8 +1,8 @@
-package domain.transformation.filter
+package domain.transformation.pixelwise.filter
 
-import domain.transformation.Transformation
+import domain.transformation.pixelwise.PixelwiseTransformation
 
-abstract class Filter(private val kernel: Array<Array<Double>>): Transformation {
+abstract class Filter(private val kernel: Array<Array<Double>>): PixelwiseTransformation {
     protected fun applyFilter(image: Array<Array<Array<UByte>>>): Array<Array<Array<UByte>>> {
         val height = image.size
         val width = image[0].size
