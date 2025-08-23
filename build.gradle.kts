@@ -24,12 +24,19 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.kotlinx.coroutines.test)
         }
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
         }
+        jvmTest.dependencies {
+            implementation(libs.mockk)
+            implementation(libs.junit.jupiter.api)
+            runtimeOnly(libs.junit.jupiter.engine)
+        }
     }
+
 }
 
 compose.desktop {
@@ -42,5 +49,9 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
