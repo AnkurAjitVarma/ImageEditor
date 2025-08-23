@@ -4,6 +4,8 @@ import command.Environment
 import domain.image.Image
 import io.mockk.*
 import kotlinx.coroutines.test.runTest
+import exceptions.MissingBlueChannel
+import exceptions.NonExistentOperand
 import kotlin.test.*
 
 class BlueComponentTest {
@@ -42,7 +44,7 @@ class BlueComponentTest {
         val result = command.execute(environment)
 
         assertTrue(result.isFailure)
-        assertTrue(result.exceptionOrNull() is IllegalArgumentException)
+        assertTrue(result.exceptionOrNull() is NonExistentOperand)
     }
 
     @Test
@@ -57,6 +59,6 @@ class BlueComponentTest {
         val result = command.execute(environment)
 
         assertTrue(result.isFailure)
-        assertTrue(result.exceptionOrNull() is IllegalArgumentException)
+        assertTrue(result.exceptionOrNull() is MissingBlueChannel)
     }
 }

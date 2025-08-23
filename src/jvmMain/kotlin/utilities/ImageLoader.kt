@@ -1,5 +1,8 @@
 package utilities
 
+import domain.BLUE_CHANNEL
+import domain.GREEN_CHANNEL
+import domain.RED_CHANNEL
 import domain.image.Image
 import java.awt.image.BufferedImage
 import java.nio.file.Files

@@ -1,8 +1,8 @@
 package domain.transformation.color
 
-import utilities.BLUE_CHANNEL
-import utilities.GREEN_CHANNEL
-import utilities.RED_CHANNEL
+import domain.BLUE_CHANNEL
+import domain.GREEN_CHANNEL
+import domain.RED_CHANNEL
 
 val Sepia = ColorTransformation { image ->
     val height = image.size

@@ -3,9 +3,9 @@ package domain.image.implementation
 import domain.image.Image
 import domain.transformation.color.ColorTransformation
 import domain.transformation.pixelwise.PixelwiseTransformation
-import utilities.BLUE_CHANNEL
-import utilities.GREEN_CHANNEL
-import utilities.RED_CHANNEL
+import domain.BLUE_CHANNEL
+import domain.GREEN_CHANNEL
+import domain.RED_CHANNEL
 
 internal class ImageImpl(private val image: Array<Array<Array<UByte>>>):Image {
     override fun height(): Int = image.size
