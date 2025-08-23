@@ -3,9 +3,9 @@ package domain.image
 import domain.image.implementation.ImageImpl
 import domain.transformation.color.ColorTransformation
 import domain.transformation.pixelwise.PixelwiseTransformation
-import utilities.BLUE_CHANNEL
-import utilities.GREEN_CHANNEL
-import utilities.RED_CHANNEL
+import domain.BLUE_CHANNEL
+import domain.GREEN_CHANNEL
+import domain.RED_CHANNEL
 
 interface Image {
     fun height():Int
