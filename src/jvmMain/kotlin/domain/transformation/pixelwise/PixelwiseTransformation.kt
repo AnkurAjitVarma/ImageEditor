@@ -1,4 +1,4 @@
 package domain.transformation.pixelwise
-fun interface PixelwiseTransformation {
+interface PixelwiseTransformation {
     fun transform(image: Array<Array<Array<UByte>>>): Array<Array<Array<UByte>>>
 }

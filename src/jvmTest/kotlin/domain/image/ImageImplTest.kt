@@ -40,12 +40,13 @@ class ImageImplTest {
 
     @Test
     fun `test apply transformation applies the transformation`() {
-        val mockPixelwiseTransformation = PixelwiseTransformation { image ->
-            image.map { row ->
-                row.map { pixel ->
-                    pixel.map { 0.toUByte() }.toTypedArray()
+        val mockPixelwiseTransformation = object : PixelwiseTransformation {
+            override fun transform(image: Array<Array<Array<UByte>>>): Array<Array<Array<UByte>>> =
+                image.map { row ->
+                    row.map { pixel ->
+                        pixel.map { 0.toUByte() }.toTypedArray()
+                    }.toTypedArray()
                 }.toTypedArray()
-            }.toTypedArray()
         }
 
         val transformedImage = image.apply(mockPixelwiseTransformation)

@@ -2,7 +2,7 @@ package domain.transformation.pixelwise.filter
 
 import domain.transformation.pixelwise.PixelwiseTransformation
 
-abstract class Filter(private val kernel: Array<Array<Double>>): PixelwiseTransformation {
+class Filter(private val kernel: Array<Array<Double>>): PixelwiseTransformation {
     protected fun applyFilter(image: Array<Array<Array<UByte>>>): Array<Array<Array<UByte>>> {
         val height = image.size
         val width = image[0].size
@@ -52,4 +52,6 @@ abstract class Filter(private val kernel: Array<Array<Double>>): PixelwiseTransf
         }
         return Math.round(sum).toInt().coerceIn(0, 255).toUByte()
     }
+
+    override fun transform(image: Array<Array<Array<UByte>>>): Array<Array<Array<UByte>>> = applyFilter(image)
 }
