@@ -1,0 +1,13 @@
+package command.flip
+
+import command.Command
+import command.Environment
+import domain.transformation.pixelwise.spatial.VerticalFlip
+import exceptions.NonExistentOperand
+
+data class VerticalFlip(val operand: String, val result: String) : Command {
+    override suspend fun execute(environment: Environment): Result<Unit> = runCatching {
+        val image = environment.getImage(operand) ?: throw NonExistentOperand(operand)
+        environment.putImage(result, image.apply(VerticalFlip))
+    }
+}
