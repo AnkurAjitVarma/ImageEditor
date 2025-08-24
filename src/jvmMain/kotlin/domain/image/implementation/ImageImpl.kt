@@ -8,6 +8,25 @@ import domain.GREEN_CHANNEL
 import domain.RED_CHANNEL
 
 internal class ImageImpl(private val image: Array<Array<Array<UByte>>>):Image {
+    private val byteArray by lazy {
+        val array = ByteArray(height() * width() * 4)
+        var index = 0
+        for (row in 0 until height()) {
+            for (column in 0 until width()) {
+                val pixel = image[row][column]
+                val r = pixel.getOrNull(0) ?: 0u
+                val g = pixel.getOrNull(1) ?: 0u
+                val b = pixel.getOrNull(2) ?: 0u
+                val a = if (pixel.size > 3) pixel[3] else 255u
+
+                array[index++] = r.toByte()
+                array[index++] = g.toByte()
+                array[index++] = b.toByte()
+                array[index++] = a.toByte()
+            }
+        }
+        array
+    }
     override fun height(): Int = image.size
 
     override fun width(): Int = image[0].size
@@ -81,4 +100,5 @@ internal class ImageImpl(private val image: Array<Array<Array<UByte>>>):Image {
     }
 
     override fun rgbSplit(): List<Image>? = if (noOfChannels()!=3) null else listOfNotNull(redComponent(), greenComponent(), blueComponent())
+    override fun toByteArray(): ByteArray = byteArray.copyOf()
 }

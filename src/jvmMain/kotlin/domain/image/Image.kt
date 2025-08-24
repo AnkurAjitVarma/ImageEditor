@@ -21,6 +21,7 @@ interface Image {
     fun greenComponent():Image?
     fun blueComponent():Image?
     fun rgbSplit():List<Image>?
+    fun toByteArray():ByteArray
     companion object {
         fun fromArray(array: Array<Array<Array<UByte>>>):Image = ImageImpl(array)
         fun rgbCombine(red:Image, green: Image, blue: Image):Image? = if (combinable(listOf(red, green, blue))) {
