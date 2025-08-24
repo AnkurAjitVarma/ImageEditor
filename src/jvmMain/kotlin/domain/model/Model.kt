@@ -9,6 +9,6 @@ interface Model {
     fun putImage(name:String, image:Image): Model
     fun asMap(): Map<String, Image>
     companion object{
-        fun get():Model = LedgerImpl(persistentHashMapOf())
+        fun getDefault():Model = LedgerImpl(persistentHashMapOf())
     }
 }
