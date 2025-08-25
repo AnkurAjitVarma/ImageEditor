@@ -2,8 +2,8 @@ package command.effect
 
 import command.Environment
 import domain.image.Image
-import exceptions.NonExistentOperand
-import exceptions.NonRGBImage
+import domain.exceptions.NonExistentOperand
+import domain.exceptions.NonRGBImage
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just

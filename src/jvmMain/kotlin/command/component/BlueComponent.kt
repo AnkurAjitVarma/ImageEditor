@@ -2,8 +2,8 @@ package command.component
 
 import command.Command
 import command.Environment
-import exceptions.MissingBlueChannel
-import exceptions.NonExistentOperand
+import domain.exceptions.MissingBlueChannel
+import domain.exceptions.NonExistentOperand
 
 data class BlueComponent(val operand: String, val result: String) : Command {
     override suspend fun execute(environment: Environment): Result<Unit> = runCatching {

@@ -4,10 +4,10 @@ import controller.loader.ImageLoader
 import domain.BLUE_CHANNEL
 import domain.GREEN_CHANNEL
 import domain.RED_CHANNEL
+import domain.exceptions.FileDoesNotExist
+import domain.exceptions.ImageFormatNotSupported
+import domain.exceptions.URLNotReadable
 import domain.image.Image
-import exceptions.FileDoesNotExist
-import exceptions.ImageFormatNotSupported
-import exceptions.URLNotReadable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.awt.Transparency

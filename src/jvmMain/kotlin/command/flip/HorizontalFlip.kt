@@ -2,8 +2,8 @@ package command.flip
 
 import command.Command
 import command.Environment
+import domain.exceptions.NonExistentOperand
 import domain.transformation.pixelwise.spatial.HorizontalFlip
-import exceptions.NonExistentOperand
 
 data class HorizontalFlip(val operand: String, val result: String) : Command {
     override suspend fun execute(environment: Environment): Result<Unit> = runCatching {

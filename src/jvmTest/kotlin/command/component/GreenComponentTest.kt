@@ -2,8 +2,8 @@ package command.component
 
 import command.Environment
 import domain.image.Image
-import exceptions.MissingGreenChannel
-import exceptions.NonExistentOperand
+import domain.exceptions.MissingGreenChannel
+import domain.exceptions.NonExistentOperand
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just

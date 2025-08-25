@@ -2,7 +2,7 @@ package command.io
 
 import command.Environment
 import domain.image.Image
-import exceptions.NonExistentOperand
+import domain.exceptions.NonExistentOperand
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.coVerifyOrder
