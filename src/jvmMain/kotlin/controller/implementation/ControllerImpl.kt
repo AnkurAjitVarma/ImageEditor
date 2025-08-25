@@ -6,18 +6,13 @@ import controller.Controller
 import controller.loader.ImageLoader
 import domain.image.Image
 import domain.model.Model
-import kotlinx.coroutines.CoroutineName
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import viewmodel.ViewModel
 import java.net.URL
 import java.nio.file.Path
@@ -46,8 +41,9 @@ class ControllerImpl(initialState: Model, val commands: ReceiveChannel<Command>,
     init {
         scope.launch(CoroutineName("Command Event Loop")){
             commands.consumeAsFlow().collect { command ->
-                command.execute(environment).onFailure { exception ->
-                    messages.send(exception.message ?: "Unknown error")
+                launch {
+                    command.execute(environment)
+                        .onFailure { exception -> messages.send(exception.message ?: "Unknown error") }
                 }
             }
         }
