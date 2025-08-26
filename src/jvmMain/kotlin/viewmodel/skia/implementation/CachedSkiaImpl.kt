@@ -10,11 +10,12 @@ import org.jetbrains.skia.Image as SkiaImage
 class CachedSkiaImpl(private val cache:MutableMap<Image, ImageBitmap>): Skia {
     override fun visualize(images: Map<String, Image>): Map<String, ImageBitmap> {
         val result = images.mapValues { (_, image) ->
-            cache.getOrPut(image) {
-                toSkiaImage(image).toComposeImageBitmap()
+            cache.computeIfAbsent(image) {
+                toSkiaImage(it).toComposeImageBitmap()
             }
         }
-        cache.keys.retainAll(images.values.toSet())
+        val active = images.values.toSet()
+        cache.keys.removeIf { it !in active }
         return result
     }
 
