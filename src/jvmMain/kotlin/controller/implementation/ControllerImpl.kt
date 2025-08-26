@@ -9,15 +9,13 @@ import domain.model.Model
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.SendChannel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.consumeAsFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import viewmodel.ViewModel
 import java.net.URL
 import java.nio.file.Path
 import kotlin.coroutines.cancellation.CancellationException
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class ControllerImpl(initialState: Model, val commands: ReceiveChannel<Command>, val messages: SendChannel<String>, val viewModel: ViewModel, val loader: ImageLoader) :
     Controller {
     private val applicationState = MutableStateFlow(initialState)
@@ -39,13 +37,19 @@ class ControllerImpl(initialState: Model, val commands: ReceiveChannel<Command>,
     override val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
     init {
-        scope.launch(CoroutineName("Command Event Loop")){
-            commands.consumeAsFlow().collect { command ->
-                launch {
-                    command.execute(environment)
-                        .onFailure { exception -> messages.send(exception.message ?: "Unknown error") }
+        scope.launch(CoroutineName("Command Event Loop")) {
+            commands.consumeAsFlow()
+                .map { command ->
+                    flow {
+                        emit(command.execute(environment))
+                    }
                 }
-            }
+                .flattenMerge()
+                .collect { result ->
+                    result.onFailure { exception ->
+                        messages.send(exception.message ?: "Unknown error")
+                    }
+                }
         }
     }
 
