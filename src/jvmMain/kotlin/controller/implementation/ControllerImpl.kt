@@ -9,6 +9,7 @@ import domain.model.Model
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.SendChannel
+import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.*
 import viewmodel.ViewModel
 import java.net.URL
@@ -36,12 +37,12 @@ class ControllerImpl(initialState: Model, val commands: ReceiveChannel<Command>,
     override val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
     init {
-        commands.consumeAsFlow()
-                .map { command -> flow { emit(command.execute(environment)) } }
-                .flattenMerge()
-                .mapNotNull (Result<Unit>::exceptionOrNull)
-                .onEach { exception -> messages.send(exception.message ?: "Unknown error") }
-                .launchIn(scope + CoroutineName("Command Event Loop"))
+        scope.launch(CoroutineName("Command Event Loop")) {
+            commands.consumeEach { command -> launch {
+                    command.execute(environment).onFailure { exception -> messages.send(exception.message ?: "Unknown error") }
+                }
+            }
+        }
     }
 
     override fun start() = viewModel.launch(applicationState.asStateFlow())
