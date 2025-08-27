@@ -40,7 +40,7 @@ class ViewModelImpl(private val commandChannel: SendChannel<Command>, private va
                     .map(Model::asMap)
                     .map(skia::visualize)
                     .stateIn(scope, SharingStarted.Eagerly, emptyMap())
-            override fun messages(): StateFlow<String> = messageChannel.receiveAsFlow().stateIn(scope, SharingStarted.Eagerly, "")
+            override fun messages(): StateFlow<String> = messageChannel.receiveAsFlow().stateIn(scope, SharingStarted.Eagerly, "Welcome to Image Editor")
             override fun current(): StateFlow<String?> = current.asStateFlow()
         }
 

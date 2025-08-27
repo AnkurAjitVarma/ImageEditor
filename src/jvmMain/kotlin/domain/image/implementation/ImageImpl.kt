@@ -7,7 +7,7 @@ import domain.BLUE_CHANNEL
 import domain.GREEN_CHANNEL
 import domain.RED_CHANNEL
 
-internal class ImageImpl(private val image: Array<Array<Array<UByte>>>):Image {
+class ImageImpl(private val image: Array<Array<Array<UByte>>>): Image {
     private val byteArray by lazy {
         val array = ByteArray(height() * width() * 4)
         var index = 0
