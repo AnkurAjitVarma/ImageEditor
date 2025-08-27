@@ -36,20 +36,12 @@ class ControllerImpl(initialState: Model, val commands: ReceiveChannel<Command>,
     override val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
     init {
-        scope.launch(CoroutineName("Command Event Loop")) {
-            commands.consumeAsFlow()
-                .map { command ->
-                    flow {
-                        emit(command.execute(environment))
-                    }
-                }
+        commands.consumeAsFlow()
+                .map { command -> flow { emit(command.execute(environment)) } }
                 .flattenMerge()
-                .collect { result ->
-                    result.onFailure { exception ->
-                        messages.send(exception.message ?: "Unknown error")
-                    }
-                }
-        }
+                .mapNotNull (Result<Unit>::exceptionOrNull)
+                .onEach { exception -> messages.send(exception.message ?: "Unknown error") }
+                .launchIn(scope + CoroutineName("Command Event Loop"))
     }
 
     override fun start() = viewModel.launch(applicationState.asStateFlow())
