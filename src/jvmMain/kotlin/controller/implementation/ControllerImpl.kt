@@ -16,11 +16,10 @@ import java.nio.file.Path
 import kotlin.coroutines.cancellation.CancellationException
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class ControllerImpl(initialState: Model, val commands: ReceiveChannel<Command>, val messages: SendChannel<String>, val viewModel: ViewModel, val loader: ImageLoader) :
-    Controller {
+class ControllerImpl(initialState: Model, val commands: ReceiveChannel<Command>, val messages: SendChannel<String>, val viewModel: ViewModel, val loader: ImageLoader) : Controller {
     private val applicationState = MutableStateFlow(initialState)
 
-    private val environment = object : Environment{
+    private val environment = object : Environment {
         override fun getImage(name: String): Image? = applicationState.value.getImage(name)
 
         override fun putImage(name: String, image: Image) = applicationState.update { it.putImage(name, image) }

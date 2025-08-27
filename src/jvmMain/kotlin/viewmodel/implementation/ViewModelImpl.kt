@@ -2,6 +2,7 @@ package viewmodel.implementation
 
 import androidx.compose.ui.graphics.ImageBitmap
 import command.Command
+import command.control.Exit
 import domain.model.Model
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import view.Handler
 import view.State
 import view.View
@@ -43,6 +45,11 @@ class ViewModelImpl(private val commandChannel: SendChannel<Command>, private va
         }
 
     private val handler = object : Handler {
+        override fun quit() {
+            scope.launch {
+                commandChannel.send(Exit)
+            }
+        }
 
     }
 
