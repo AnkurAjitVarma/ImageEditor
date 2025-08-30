@@ -2,7 +2,7 @@ package command.effect
 
 import command.Command
 import command.Environment
-import domain.exceptions.NonExistentOperand
+import exceptions.NonExistentOperand
 import domain.transformation.pixelwise.level.Brighten
 
 data class Brighten(val operand: String, val amount: UByte, val result: String) : Command {

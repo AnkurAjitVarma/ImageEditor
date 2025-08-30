@@ -1,4 +1,4 @@
-package domain.exceptions
+package exceptions
 
 import java.net.URL
 

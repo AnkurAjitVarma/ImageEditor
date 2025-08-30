@@ -2,7 +2,7 @@ package command.flip
 
 import command.Environment
 import domain.image.Image
-import domain.exceptions.NonExistentOperand
+import exceptions.NonExistentOperand
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just

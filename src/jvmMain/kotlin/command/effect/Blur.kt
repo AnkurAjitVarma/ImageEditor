@@ -2,7 +2,7 @@ package command.effect
 
 import command.Command
 import command.Environment
-import domain.exceptions.NonExistentOperand
+import exceptions.NonExistentOperand
 import domain.transformation.pixelwise.filter.Blur
 
 data class Blur(val operand: String, val result: String) : Command {
