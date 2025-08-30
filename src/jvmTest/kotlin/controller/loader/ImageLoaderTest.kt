@@ -3,8 +3,8 @@ package controller.loader
 import com.sun.net.httpserver.HttpExchange
 import com.sun.net.httpserver.HttpHandler
 import com.sun.net.httpserver.HttpServer
-import domain.exceptions.FileDoesNotExist
-import domain.exceptions.URLNotReadable
+import exceptions.FileDoesNotExist
+import exceptions.URLNotReadable
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test

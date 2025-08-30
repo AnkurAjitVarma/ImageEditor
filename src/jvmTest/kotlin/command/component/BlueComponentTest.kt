@@ -1,8 +1,8 @@
 package command.component
 
 import command.Environment
-import domain.exceptions.MissingBlueChannel
-import domain.exceptions.NonExistentOperand
+import exceptions.MissingBlueChannel
+import exceptions.NonExistentOperand
 import domain.image.Image
 import io.mockk.*
 import kotlinx.coroutines.test.runTest

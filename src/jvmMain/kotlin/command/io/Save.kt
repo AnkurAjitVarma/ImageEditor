@@ -2,7 +2,7 @@ package command.io
 
 import command.Command
 import command.Environment
-import domain.exceptions.NonExistentOperand
+import exceptions.NonExistentOperand
 import java.nio.file.Path
 
 data class Save(val operand: String, val location: Path) : Command {

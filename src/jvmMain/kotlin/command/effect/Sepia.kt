@@ -2,8 +2,8 @@ package command.effect
 
 import command.Command
 import command.Environment
-import domain.exceptions.NonExistentOperand
-import domain.exceptions.NonRGBImage
+import exceptions.NonExistentOperand
+import exceptions.NonRGBImage
 import domain.transformation.color.Sepia
 
 data class Sepia(val operand: String, val result: String) : Command {
