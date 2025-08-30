@@ -10,10 +10,10 @@ import java.net.URI
 data class Download(val url: String, val name: String) : Command {
     override suspend fun execute(environment: Environment): Result<Unit> = runCatching {
         val downloadUrl = runCatching { URI(url).toURL() }.getOrElse {
-            error -> when(error) {
-                is MalformedURLException -> throw MalformedURL(url)
-                is IllegalArgumentException -> throw URLNotAbsolute(url)
-                else -> throw error
+            error -> throw when(error) {
+                is MalformedURLException -> MalformedURL(url)
+                is IllegalArgumentException -> URLNotAbsolute(url)
+                else -> error
             }
         }
         val image = environment.downloadImage(downloadUrl).getOrThrow()

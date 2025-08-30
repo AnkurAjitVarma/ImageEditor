@@ -2,18 +2,11 @@ package command.io
 
 import command.Environment
 import domain.image.Image
-import exceptions.MalformedURL
 import exceptions.URLNotAbsolute
-import io.mockk.CapturingSlot
-import io.mockk.coEvery
-import io.mockk.coVerify
-import io.mockk.every
-import io.mockk.excludeRecords
-import io.mockk.mockk
-import io.mockk.slot
-import io.mockk.verify
+import io.mockk.*
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import java.io.IOException
 import java.net.URI
