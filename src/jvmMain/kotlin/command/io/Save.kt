@@ -11,9 +11,9 @@ data class Save(val operand: String, val path: String) : Command {
     override suspend fun execute(environment: Environment): Result<Unit> = runCatching {
         val image = environment.getImage(operand) ?: throw NonExistentOperand(operand)
         val location = runCatching { Path.of(path) }.getOrElse {
-            error -> when (error){
-                is InvalidPathException -> throw InvalidFilePath(path)
-                else -> throw error
+            error -> throw when (error){
+                is InvalidPathException -> InvalidFilePath(path)
+                else -> error
             }
         }
         environment.saveImageToFile(location, image).getOrThrow()
