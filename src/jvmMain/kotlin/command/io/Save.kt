@@ -2,9 +2,20 @@ package command.io
 
 import command.Command
 import command.Environment
+import exceptions.InvalidFilePath
 import exceptions.NonExistentOperand
+import java.nio.file.InvalidPathException
 import java.nio.file.Path
 
-data class Save(val operand: String, val location: Path) : Command {
-    override suspend fun execute(environment: Environment): Result<Unit> = runCatching { environment.getImage(operand) ?: throw NonExistentOperand(operand) }.mapCatching { image -> environment.saveImageToFile(location, image).getOrThrow() }
+data class Save(val operand: String, val path: String) : Command {
+    override suspend fun execute(environment: Environment): Result<Unit> = runCatching {
+        val image = environment.getImage(operand) ?: throw NonExistentOperand(operand)
+        val location = runCatching { Path.of(path) }.getOrElse {
+            error -> when (error){
+                is InvalidPathException -> throw InvalidFilePath(path)
+                else -> throw error
+            }
+        }
+        environment.saveImageToFile(location, image).getOrThrow()
+    }
 }
