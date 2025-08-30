@@ -38,10 +38,13 @@ class ControllerImpl(initialState: Model, val commands: ReceiveChannel<Command>,
 
     init {
         scope.launch(CoroutineName("Command Event Loop")) {
-            commands.consumeEach { command -> launch {
-                    command.execute(environment).onFailure { exception -> messages.send(exception.message ?: "Unknown error") }
+            for (command in commands)
+                launch {
+                    val error = command.execute(environment).exceptionOrNull()
+                    if (error != null) {
+                        messages.send(error.message ?: "Unknown error")
+                    }
                 }
-            }
         }
     }
 
