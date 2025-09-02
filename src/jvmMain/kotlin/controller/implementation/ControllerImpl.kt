@@ -9,14 +9,14 @@ import domain.model.Model
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.SendChannel
-import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import viewmodel.ViewModel
 import java.net.URL
 import java.nio.file.Path
 import kotlin.coroutines.cancellation.CancellationException
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class ControllerImpl(initialState: Model, val commands: ReceiveChannel<Command>, val messages: SendChannel<String>, val viewModel: ViewModel, val loader: ImageLoader) : Controller {
     private val applicationState = MutableStateFlow(initialState)
 
@@ -51,9 +51,9 @@ class ControllerImpl(initialState: Model, val commands: ReceiveChannel<Command>,
     override fun start() = viewModel.launch(applicationState.asStateFlow())
 
     override fun stop() {
-        viewModel.close()
         val exception = CancellationException("Application stopped")
-        commands.cancel()
+        viewModel.close(exception)
         scope.cancel(exception)
+        messages.close(exception)
     }
 }

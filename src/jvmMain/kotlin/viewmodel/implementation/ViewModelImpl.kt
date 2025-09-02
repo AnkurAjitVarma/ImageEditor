@@ -55,9 +55,9 @@ class ViewModelImpl(private val commandChannel: SendChannel<Command>, private va
 
     override fun launch(state: StateFlow<Model>) = view.launch(state(state), handler)
 
-    override fun close() {
+    override fun close(exception: CancellationException) {
         applicationRunning.value = false
-        scope.cancel()
-        commandChannel.close()
+        scope.cancel(exception)
+        commandChannel.close(exception)
     }
 }
