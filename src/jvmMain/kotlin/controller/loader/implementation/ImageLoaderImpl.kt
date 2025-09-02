@@ -93,9 +93,10 @@ object ImageLoaderImpl: ImageLoader {
                 var i = 0
                 for (y in 0 until height) {
                     for (x in 0 until width) {
-                        val b = bytes[i++].toInt() and 0xFF
-                        val g = bytes[i++].toInt() and 0xFF
                         val r = bytes[i++].toInt() and 0xFF
+                        val g = bytes[i++].toInt() and 0xFF
+                        val b = bytes[i++].toInt() and 0xFF
+
                         result[y][x][RED_CHANNEL] = r.toUByte()
                         result[y][x][GREEN_CHANNEL] = g.toUByte()
                         result[y][x][BLUE_CHANNEL] = b.toUByte()
